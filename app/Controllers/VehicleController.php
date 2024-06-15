@@ -15,7 +15,7 @@ class VehicleController extends BaseController
         $vehicleModel = new VehicleModel();
         $vehicles = $vehicleModel->findAll();
 
-        return view('admin/vehicles/manage', ['vehicles' => $vehicles, ...$data]);
+        return view('admin/vehicles/index', ['vehicles' => $vehicles, ...$data]);
     }
 
 

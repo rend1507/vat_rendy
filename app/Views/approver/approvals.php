@@ -2,17 +2,8 @@
 
 <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
     <div>
-        <h3 class="fw-bold mb-3">Dashboard</h3>
-        <h6 class="op-7 mb-2">Lihat rangkuman reservasi kendaraan</h6>
-    </div>
-    <div class="ms-md-auto py-2 py-md-0">
-
-        <a href="<?= base_url('admin/pesan') ?>" class="btn btn-primary btn-round">
-            Tambah Reservasi
-            <span class="ms-2 btn-label">
-                <i class="fas fa-plus"></i>
-            </span>
-        </a>
+        <h3 class="fw-bold mb-3">Daftar Approval</h3>
+        <h6 class="op-7 mb-2">Lihat request approval terdahulu</h6>
     </div>
 </div>
 
@@ -53,16 +44,17 @@
                             foreach ($reservations as $reservation): ?>
                                 <tr>
                                     <td><?= $i++ ?></td>
-                                    <td><?= $reservation['name'] ?> - <?= ucfirst($reservation['type']) ?> (<?= $reservation['owned'] ?>)
+                                    <td><?= $reservation['name'] ?> - <?= ucfirst($reservation['type']) ?>
+                                        (<?= $reservation['owned'] ?>)
                                     </td>
                                     <td><?= $reservation['driver'] ?></td>
                                     <td><?= $reservation['status'] ?></td>
                                     <td><?= $reservation['created_at'] ?></td>
                                     <td>
-                                        <a href="/admin/remove_reservation/<?= $reservation['id'] ?>"
-                                            class="btn btn-danger d-block"
-                                            onclick="return confirm('Batalkan reservasi ini?');">Batalkan</a>
-
+                                        <a href="/approver/approve_reservation/<?= $reservation['id'] ?>"
+                                            class="btn btn-success <?= $reservation['status'] == 'approved' ? 'disabled' : '' ?>">Approve</a>
+                                        <a href="/approver/reject_reservation/<?= $reservation['id'] ?>"
+                                            class="btn btn-danger <?= $reservation['status'] == 'rejected' ? 'disabled' : '' ?>">Reject</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -73,7 +65,7 @@
                     ?>
                     <div class="container">
                         <div class="card bg-info text-white my-3">
-                            <h1 class="text-center mb-0">Masih Kosong, silahkan tambah</h1>
+                            <h1 class="text-center mb-0">Masih Kosong, silahkan tunggu admin menambah</h1>
                         </div>
                     </div>
                     <?php

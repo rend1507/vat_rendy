@@ -15,13 +15,13 @@ class AdminController extends BaseController
     {
         $data['title'] = "Beranda Admin";
 
-        $db      = \Config\Database::connect();
+        $db = \Config\Database::connect();
         $builder = $db->table('reservations as r');
         $reservations = $builder->select(
             "r.id, v.name, v.type, v.owned , r.driver, r.status, r.created_at"
         )
-                ->join('vehicles as v', 'r.vehicle_id = v.id', 'inner')
-                 ->get()->getResultArray();
+            ->join('vehicles as v', 'r.vehicle_id = v.id', 'inner')
+            ->get()->getResultArray();
 
         return view('admin/index', [
             'reservations' => $reservations,
@@ -51,8 +51,8 @@ class AdminController extends BaseController
         $reservationApproverModel = new ReservationApproverModel();
 
         $approvers = $this->request->getPost('approver_ids');
-        if($approvers){
-            if(sizeOf($approvers) >= 2){
+        if ($approvers) {
+            if (sizeOf($approvers) >= 2) {
                 $data = [
                     'vehicle_id' => $this->request->getPost('vehicle_id'),
                     'user_id' => session()->get('user_id'),
@@ -69,11 +69,11 @@ class AdminController extends BaseController
                 }
 
                 return redirect()->to('/admin');
-            }else{
-                return redirect()->back()->with('error_approver', 'Approver minimal 2'); 
+            } else {
+                return redirect()->back()->with('error_approver', 'Approver minimal 2');
             }
-        }else{
-            return redirect()->back()->with('error_approver', 'Pilih salah satu approver'); 
+        } else {
+            return redirect()->back()->with('error_approver', 'Pilih salah satu approver');
         }
     }
 

@@ -9,6 +9,7 @@
 
 
   <!-- Fonts and icons -->
+  <link rel="icon" type="image/x-icon" href="<?=base_url('assets/img/favicon.png')?>">
   <script src="<?= base_url('assets/js/plugin/webfont/webfont.min.js') ?>"></script>
   <script>
     WebFont.load({
@@ -50,7 +51,7 @@
             <!-- Logo Header -->
             <div class="logo-header" data-background-color="dark">
               <a href="index.html" class="logo">
-                <img src="<?= base_url('assets/img/kaiadmin/logo_light.svg') ?>" alt="navbar brand" class="navbar-brand"
+                <img src="<?= base_url('assets/img/logo.png') ?>" alt="navbar brand" class="navbar-brand"
                   height="20" />
               </a>
               <div class="nav-toggle">

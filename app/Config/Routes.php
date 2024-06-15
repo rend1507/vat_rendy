@@ -25,6 +25,7 @@ $routes->post('/admin/vehicles/update/(:num)', 'VehicleController::update/$1');
 $routes->get('/admin/vehicles/delete/(:num)', 'VehicleController::delete/$1');
 
 $routes->get('/approver', 'ApproverController::index');
+$routes->get('/approver/approvals', 'ApproverController::approvalsList');
 $routes->get('/approver/laporan', 'ReportController::index');
 $routes->get('/approver/approve_reservation/(:num)', 'ApproverController::approveReservation/$1');
 $routes->get('/approver/reject_reservation/(:num)', 'ApproverController::rejectReservation/$1');

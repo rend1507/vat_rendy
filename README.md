@@ -1,68 +1,131 @@
-# CodeIgniter 4 Application Starter
+# Panduan Penggunaan Aplikasi
 
-## What is CodeIgniter?
+## Informasi Aplikasi
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+Aplikasi ini adalah sistem manajemen kendaraan yang dibangun menggunakan framework CodeIgniter 4. Aplikasi ini dirancang untuk membantu pengguna dalam mengelola data kendaraan.
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+### Versi Aplikasi
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+- **Framework**: CodeIgniter 4
+- **Versi PHP**: 7.4 atau lebih baru
+- **Versi Database**: MySQL 5.7 atau lebih baru
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## Daftar Username dan Password
 
-## Installation & updates
+Berikut adalah daftar username dan password default untuk mengakses aplikasi:
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+| Username   | Password     | Peran       |
+|------------|--------------|-------------|
+| admin1     | admin1123    | Admin       |
+| admin2     | admin2123    | Admin       |
+| approver1  | approver1123 | Approver    |
+| approver2  | approver2123 | Approver    |
+| approver3  | approver3123 | Approver    |
+| approver4  | approver4123 | Approver    |
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+**Catatan:** Demi keamanan, disarankan untuk segera mengganti password setelah login pertama kali.
 
-## Setup
+## Persyaratan Sistem
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+- **Web Server**: Apache atau Nginx
+- **PHP**: Versi 7.4 atau lebih baru
+- **Database**: MySQL 5.7 atau lebih baru
+- **Composer**: Untuk mengelola dependensi PHP
 
-## Important Change with index.php
+## Panduan Instalasi
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Berikut adalah langkah-langkah untuk menginstal aplikasi ini:
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+### 1. Clone Repository
 
-**Please** read the user guide for a better explanation of how CI4 works!
+Clone repository ini ke direktori lokal Anda:
 
-## Repository Management
+```bash
+git clone https://github.com/username/repo.git
+```
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+### 2. Instal Dependensi
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+Masuk ke direktori aplikasi dan jalankan perintah berikut untuk menginstal semua dependensi yang diperlukan:
 
-## Server Requirements
+```bash
+cd repo
+composer install
+```
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+### 3. Konfigurasi Environment
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+Salin file `.env.example` menjadi `.env` dan sesuaikan pengaturan database Anda:
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+```bash
+cp .env.example .env
+```
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Edit file `.env` dan sesuaikan bagian berikut:
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+```bash
+database.default.hostname = 127.0.0.1
+database.default.database = vat
+database.default.username = (username_database_anda)
+database.default.password = (password_database_anda)
+database.default.DBDriver = MySQLi
+```
+
+### 4. Migrasi dan Seed Database
+
+Jalankan migrasi database untuk membuat tabel-tabel yang diperlukan:
+
+```bash
+php spark migrate
+```
+
+Kemudian, jalankan seeder untuk mengisi data awal:
+
+```bash
+php spark db:seed DatabaseSeeder
+```
+
+### 5. Menjalankan Server
+
+Jalankan server pengembangan bawaan CodeIgniter:
+
+```bash
+php spark serve
+```
+
+Aplikasi akan dapat diakses di `http://localhost:8080`.
+
+## Panduan Penggunaan
+
+### 1. Login
+
+Buka browser Anda dan akses URL `http://localhost:8080`. Gunakan username dan password yang terdaftar untuk login.
+
+### A1. Manajemen Reservasi (Admin)
+
+Setelah login sebagai admin, Anda dapat mulai mengelola data reservasi:
+
+- **Tambah Reservasi**: Klik pada menu "Beranda" dan klik pada tombol "Tambah Reservasi +", isi formulir yang disediakan.
+- **Hapus Reservasi**: Klik pada menu "Beranda" dan lihat pada tabel reservasi (jika ada), klik pada tombol "Batalkan" pada baris yang ingin dihapus reservasinya.
+
+### A2. Mengelola Kendaraan (Admin)
+
+Setelah login sebagai admin, Anda dapat mulai mengelola data kendaraan:
+
+- **Daftar Kendaraan**: Klik pada menu "Kendaraan" dan pilih sub-menu "Daftar Kendaraan" untuk melihat semua data kendaraan yang telah ditambahkan.
+- **Edit Kendaraan**: Klik pada menu "Kendaraan" dan pilih sub-menu "Daftar Kendaraan", lalu pilih tombol "Edit" pada baris pada tabel kendaraan yang mau diedit.
+- **Edit Kendaraan**: Klik pada menu "Kendaraan" dan pilih sub-menu "Daftar Kendaraan", lalu pilih tombol "Hapus" pada baris pada tabel kendaraan yang mau diedit. tersebut.
+- **Tambah Kendaraan**: Klik pada menu "Kendaraan" dan pilih sub-menu "Tambah Kendaraan" dan isi formulir yang disediakan.
+-
+
+### B1. Approve dan Reject Reservasi (Approval)
+
+Setelah login sebagai Approvers, Anda dapat mulai mengelola data reservasi pending:
+
+- **Approve dan Reject Reservasi**: Klik pada menu "Beranda" dan lihat pada tabel reservasi (jika ada), klik pada tombol "Approve" atau "Reject" pada baris yang ingin diubah statusnya.
+- **Daftar Approvals**: Klik pada menu "Daftar Approvals" dan lihat pada tabel reservasi (jika ada), klik pada tombol "Approve" atau "Reject" pada baris yang ingin diubah statusnya.
+
+## Kontak
+
+Untuk informasi lebih lanjut, silakan hubungi saya di [rendyyofanakusuma@gmail.com](mailto:email@example.com).
+Atau WhatsApp saya di [081233069610](https://wa.me/6281233069610)

@@ -7,7 +7,7 @@ if (session()->has('user_id')):
             <!-- Logo Header -->
             <div class="logo-header" data-background-color="dark">
                 <a href="<?= base_url('/') ?>" class="logo">
-                    <img src="<?= base_url('assets/img/kaiadmin/logo_light.svg')?>" alt="navbar brand" class="navbar-brand" height="20" />
+                    <img src="<?= base_url('assets/img/logo.png')?>" alt="navbar brand" class="navbar-brand" height="20" />
                 </a>
                 <div class="nav-toggle">
                     <button class="btn btn-toggle toggle-sidebar">
@@ -42,15 +42,15 @@ if (session()->has('user_id')):
                                     <p>Kendaraan</p>
                                     <span class="caret"></span>
                                 </a>
-                                <div class="collapse " id="kendaraan">
+                                <div class="collapse <?= is_active_route('admin/vehicles') ? 'show' : '' ?>" id="kendaraan">
                                     <ul class="nav nav-collapse">
-                                        <li>
+                                        <li class="<?= is_active_route('admin/vehicles', true) ? 'active' : '' ?>">
                                             <a href="<?= base_url('admin/vehicles') ?>">
                                                 <span class="sub-item"></span>
                                                 Daftar Kendaraan
                                             </a>
                                         </li>
-                                        <li>
+                                        <li class="<?= is_active_route('admin/vehicles/tambah') ? 'active' : '' ?>">
                                             <a href="<?= base_url('admin/vehicles/tambah') ?>">
                                                 <span class="sub-item"></span>
                                                 Tambah Kendaraan
@@ -72,12 +72,14 @@ if (session()->has('user_id')):
                                 </a>
                             </li>
 
-                            <li class="nav-item <?= is_active_route('approver/laporan') ? 'active' : '' ?>">
-                                <a href="<?= base_url('approver/laporan') ?>">
-                                    <i class="fas fa-file"></i>
-                                    <p>Laporan</p>
+                            <li class="nav-item <?= is_active_route('approver/approvals') ? 'active' : '' ?>">
+                                <a href="<?= base_url('approver/approvals') ?>">
+                                    <i class="fas fa-check"></i>
+                                    <p>Daftar Approvals</p>
+                                    <!-- <span class="badge badge-success">4</span> -->
                                 </a>
                             </li>
+
                             <?php
                             break;
                         default:
