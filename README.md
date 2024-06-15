@@ -85,6 +85,8 @@ Kemudian, jalankan seeder untuk mengisi data awal:
 php spark db:seed DatabaseSeeder
 ```
 
+Jika tidak berhasil, gunakan file `database.sql` dan import pada DBMS anda
+
 ### 5. Menjalankan Server
 
 Jalankan server pengembangan bawaan CodeIgniter:
